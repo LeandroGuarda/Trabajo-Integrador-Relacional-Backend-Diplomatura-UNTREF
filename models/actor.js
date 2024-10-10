@@ -8,9 +8,16 @@ const Actor = sequelize.define({
         primaryKey: true,
         autoIncrement: true,
     },
-        nombre: {
-        type: DataTypes.STRING(20),
+    nombre: {
+        type: DataTypes.STRING(200),
         allowNull: false,
     },
-})
+},
+    {
 
+        tableName: 'actores',
+        timestamps: false,
+
+    })
+
+module.exports = { Actor }
