@@ -10,3 +10,6 @@ GET http://localhost:3000/contenido
 GET http://localhost:3000/contenido/2
 
 
+### filtrar por titulo
+GET http://localhost:3000/contenido/title/Friends
+

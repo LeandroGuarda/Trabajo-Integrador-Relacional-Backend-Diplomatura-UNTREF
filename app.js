@@ -81,6 +81,23 @@ app.get("/contenido/:id", async (req,res) =>{
 
 })
 
+// filtrar por contenidos:
+
+//Filtrar por titulo
+
+app.get("/contenido/title/:title", async (req, res) => {
+  try {
+    const contenido = await Contenido.findAll({ where: { titulo: req.params.title } });
+    contenido.length > 0
+     ? res.status(200).json(contenido)
+      : res.status(404).json({ error: "El trailer no existe" });
+  } catch (error) {
+    res
+     .status(500)
+     .json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
+
 
 
 
