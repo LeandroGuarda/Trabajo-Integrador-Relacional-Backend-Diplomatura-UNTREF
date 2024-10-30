@@ -1,16 +1,18 @@
 // Model for Contenido
 
-const { sequelize } = require('../conexion/connection')
+const { sequelize } = require('../conexion/database')
 const { DataTypes } = require('sequelize')
+const {Categorias} = require('./categoria')
 
-const Contenido = sequelize.define({
+
+const Contenido = sequelize.define('Contenido',{
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
     },
     titulo: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     poster: {
@@ -18,6 +20,18 @@ const Contenido = sequelize.define({
         allowNull: false,
 
 
+    },
+
+    duracion:{
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false
+
+    },
+
+    gen:{
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     resumen: {
         type: DataTypes.STRING(300),
@@ -28,28 +42,33 @@ const Contenido = sequelize.define({
 
     },
     trailer: {
-        type: DataTypes.STRING(200),
+        type: DataTypes.STRING,
         allowNull: false,
     },
     id_categoria: {
         type: DataTypes.INTEGER,
-
-
-    },
-    busqueda: {
-        type: DataTypes.STRING(255),
+        references: {
+          model: Categorias,
+          key: "id",
+        },
         allowNull: false,
-    },
-    reparto:{
-    type: DataTypes.STRING(255),
-    allowNull: false,
-}
+      },
+    
+   
 },
 {
 
-    tableName: 'contenido',
+    tableName: 'contenidos',
         timestamps: false,
+        indexes: [
+            { unique: false, fields: ['titulo'] },
+          ],
 
-    })
 
-module.exports = { Contenido }
+    },
+   
+)
+
+
+
+module.exports = Contenido;

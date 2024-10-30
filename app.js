@@ -1,13 +1,40 @@
 const express = require('express');
-const app = express();
-const contenidoRoutes = require('./routes/contenidoRoutes');
-const db = require('./conexion/database');
+const db = require('./conexion/database.js');
 const morgan = require('morgan');
+const Contenido  = require('./models/contenido.js');
+const contenidoRoutes = require('./routes/contenidoRoutes');
+const app = express();
+
+
+// Resto del código...
+
+
+
 
 // Middlewares
 app.use(express.json());
-app.use('/contenido', contenidoRoutes);
 app.use(morgan('dev'))
+
+//Rutas
+
+//app.use('/contenido',contenidoRoutes);
+
+
+
+//Middleware para verificar la conexión a la base de datos
+
+app.use(async (req, res, next) => {
+  console.log("falopa");
+  try {
+    await db.sequelize.authenticate();
+    console.log("Conexión establecida con exito ! =)");
+    await Contenido.sync();
+    next();
+  } catch (error) {
+    res.status(500).json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
+
 
 // Ruta para el home
 app.get('/', (req,res) =>{
@@ -15,7 +42,23 @@ app.get('/', (req,res) =>{
  });
 
  // Routes for CRUD
- 
+ app.get("/contenido", async (req, res) => {
+
+  try {
+    console.log("prev");
+    const Contenidos = await Contenido.findAll();
+    console.log(Contenidos);
+    Contenidos.length > 0
+      ? res.status(200).json(Contenidos)
+      : res.status(404).json({ error: "No hay trailers para mostrar" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
+
+
 
 
 

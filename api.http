@@ -1,0 +1,6 @@
+### Pagina principal
+GET http://localhost:3000/
+
+
+### Pagina principal
+GET http://localhost:3000/contenido
