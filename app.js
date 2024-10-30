@@ -42,6 +42,9 @@ app.get('/', (req,res) =>{
  });
 
  // Routes for CRUD
+
+ // obtener  todo el contenido
+
  app.get("/contenido", async (req, res) => {
 
   try {
@@ -57,6 +60,27 @@ app.get('/', (req,res) =>{
       .json({ error: `Error en el servidor: `, description: error.message });
   }
 });
+
+// obtener una pelicula por ID
+
+app.get("/contenido/:id", async (req,res) =>{
+  try {
+    const contenido = await Contenido.findByPk(req.params.id);
+    if (contenido) {
+      res.status(200).json(contenido);
+    } else {
+      res.status(404).json({ error: "El trailer no existe" });
+    }
+    
+  } catch (error) {
+    res
+     .status(500)
+     .json({ error: `Error en el servidor: `, description: error.message });
+    
+  }
+
+})
+
 
 
 

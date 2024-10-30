@@ -2,5 +2,11 @@
 GET http://localhost:3000/
 
 
-### Pagina principal
+### Lista todo el contenido
 GET http://localhost:3000/contenido
+
+
+### mostrar una pelicula por ID
+GET http://localhost:3000/contenido/2
+
+
