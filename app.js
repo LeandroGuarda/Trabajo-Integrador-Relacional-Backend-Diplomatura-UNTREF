@@ -24,7 +24,7 @@ app.use(morgan('dev'))
 //Middleware para verificar la conexión a la base de datos
 
 app.use(async (req, res, next) => {
-  console.log("falopa");
+ 
   try {
     await db.sequelize.authenticate();
     console.log("Conexión establecida con exito ! =)");
@@ -98,8 +98,81 @@ app.get("/contenido/title/:title", async (req, res) => {
   }
 });
 
+// filtrar contenid por genero
+
+app.get("/contenido/genero/:genero", async (req, res) => {
+  try {
+    const contenido = await Contenido.findAll({ where: { gen: req.params.genero } });
+    contenido.length > 0
+     ? res.status(200).json(contenido)
+      : res.status(404).json({ error: "El trailer no existe" });
+  } catch (error) {
+    res
+     .status(500)
+     .json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
+
+// filtrar por categoria
+
+app.get("/contenido/id_categoria/:categoria", async (req, res) => {
+  try {
+    const contenido = await Contenido.findAll({ where: { id_categoria: req.params.categoria } });
+    contenido.length > 0
+      ? res.status(200).json(contenido)
+      : res.status(404).json({ error: "El trailer no existe en esta categoría" });
+  } catch (error) {
+    res.status(500).json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
+
+ // Agregar una nueva pelicula
+
+ app.post("/contenido", async (req, res) => {
+  try {
+    const contenido = await Contenido.create(req.body);
+    res.status(201).json(contenido);
+  } catch (error) {
+    res
+     .status(500)
+     .json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
 
 
+// Modificar una pelicula
+
+app.put("/contenido/:id", async (req, res) => {
+  try {
+    const contenido = await Contenido.findByPk(req.params.id);
+    if (!contenido) {
+      return res.status(404).json({ error: "El trailer no existe" });
+    }
+    await contenido.update(req.body);
+    res.status(200).json(contenido);
+  } catch (error) {
+    res
+     .status(500)
+     .json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
+
+// Eliminar una pelicula
+
+app.delete("/contenido/:id", async (req, res) => {
+  try {
+    const contenido = await Contenido.findByPk(req.params.id);
+    if (!contenido) {
+      return res.status(404).json({ error: "El trailer no existe" });
+    }
+    await contenido.destroy();
+    res.status(200).json({ message: "Trailer eliminado exitosamente" });
+  } catch (error) {
+    res
+     .status(500)
+     .json({ error: `Error en el servidor: `, description: error.message });
+  }
+});
 
 
 

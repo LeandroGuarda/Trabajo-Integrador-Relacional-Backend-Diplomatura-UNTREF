@@ -2,14 +2,55 @@
 GET http://localhost:3000/
 
 
-### Lista todo el contenido
+### LISTAR todo el contenido
 GET http://localhost:3000/contenido
 
 
-### mostrar una pelicula por ID
+### FILTRAR una pelicula por ID
 GET http://localhost:3000/contenido/2
 
 
-### filtrar por titulo
+### FILTRAR por titulo
 GET http://localhost:3000/contenido/title/Friends
 
+
+
+
+
+###  CREAR una nueva pelicula
+
+POST http://localhost:3000/contenido
+Content-Type: application/json
+
+{
+"titulo": "La era del hielo",
+"gen": "comedia",
+"poster": "./poster/8.jpg",
+"duracion": 81,
+"id_categoria": 1,
+"trailer": "https://www.youtube.com/watch?v=RI7e1IksKEQ",
+"temporadas": "N/A",
+"resumen": "Un grupo de animales de diferentes especies debe migrar hacia el sur para evitar la extinción durante la Edad de Hielo."
+}
+
+
+ 
+
+### MODIFICAR una pelicula
+PUT http://localhost:3000/contenido/98
+Content-Type: application/json
+
+{  "id": 98,
+  "titulo": "La era del hielo 2",
+  "gen": "comedia",
+  "poster": "./poster/8.jpg",
+  "duracion": 81,
+  "id_categoria": 1,
+  "trailer": "https://www.youtube.com/watch?v=RI7e1IksKEQ",
+  "temporadas": "N/A",
+  "resumen": "Un grupo de animales de diferentes especies debe migrar hacia el sur para evitar la extinción durante la Edad de Hielo."
+  }
+
+
+### ELIMINAR una pelicula
+DELETE http://localhost:3000/contenido/98
