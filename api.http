@@ -11,10 +11,16 @@ GET http://localhost:3000/contenido/2
 
 
 ### FILTRAR por titulo
-GET http://localhost:3000/contenido/title/Friends
+GET http://localhost:3000/contenido/titulo/Friends
+
+###  FILTRAR CONTENIDO POR GENERO
+
+GET http://localhost:3000/contenido/genero/Drama
 
 
+###  FILTRAR CONTENIDO POR CATEGORIA
 
+GET http://localhost:3000/contenido/categorias/1
 
 
 ###  CREAR una nueva pelicula

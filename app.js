@@ -17,7 +17,7 @@ app.use(morgan('dev'))
 
 //Rutas
 
-//app.use('/contenido',contenidoRoutes);
+app.use('/contenido',contenidoRoutes);
 
 
 
@@ -45,73 +45,32 @@ app.get('/', (req,res) =>{
 
  // obtener  todo el contenido
 
- app.get("/contenido", async (req, res) => {
-
-  try {
-    console.log("prev");
-    const Contenidos = await Contenido.findAll();
-    console.log(Contenidos);
-    Contenidos.length > 0
-      ? res.status(200).json(Contenidos)
-      : res.status(404).json({ error: "No hay trailers para mostrar" });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: `Error en el servidor: `, description: error.message });
-  }
-});
+ 
 
 // obtener una pelicula por ID
 
-app.get("/contenido/:id", async (req,res) =>{
-  try {
-    const contenido = await Contenido.findByPk(req.params.id);
-    if (contenido) {
-      res.status(200).json(contenido);
-    } else {
-      res.status(404).json({ error: "El trailer no existe" });
-    }
-    
-  } catch (error) {
-    res
-     .status(500)
-     .json({ error: `Error en el servidor: `, description: error.message });
-    
-  }
 
-})
 
 // filtrar por contenidos:
 
 //Filtrar por titulo
 
-app.get("/contenido/title/:title", async (req, res) => {
-  try {
-    const contenido = await Contenido.findAll({ where: { titulo: req.params.title } });
-    contenido.length > 0
-     ? res.status(200).json(contenido)
-      : res.status(404).json({ error: "El trailer no existe" });
-  } catch (error) {
-    res
-     .status(500)
-     .json({ error: `Error en el servidor: `, description: error.message });
-  }
-});
+
 
 // filtrar contenid por genero
 
-app.get("/contenido/genero/:genero", async (req, res) => {
-  try {
-    const contenido = await Contenido.findAll({ where: { gen: req.params.genero } });
-    contenido.length > 0
-     ? res.status(200).json(contenido)
-      : res.status(404).json({ error: "El trailer no existe" });
-  } catch (error) {
-    res
-     .status(500)
-     .json({ error: `Error en el servidor: `, description: error.message });
-  }
-});
+// app.get("/contenido/genero/:genero", async (req, res) => {
+//   try {
+//     const contenido = await Contenido.findAll({ where: { gen: req.params.genero } });
+//     contenido.length > 0
+//      ? res.status(200).json(contenido)
+//       : res.status(404).json({ error: "El trailer no existe" });
+//   } catch (error) {
+//     res
+//      .status(500)
+//      .json({ error: `Error en el servidor: `, description: error.message });
+//   }
+// });
 
 // filtrar por categoria
 

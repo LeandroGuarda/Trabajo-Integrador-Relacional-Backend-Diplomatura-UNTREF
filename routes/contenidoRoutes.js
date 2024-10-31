@@ -4,48 +4,21 @@ const contenidoController = require('../controllers/contenidoController');
 
 
 // Routes for CRUD
-router.get('/', contenidoController.getAllData, async(req,res) => {
+
     
       
-    try {
-        const contenidos = await Contenido.findAll({
-            attributes:[
-                'id',
-                'poster',
-                'titulo',
-                'resumen',
-                'temporadas',
-                'trailer',
-                'duracion',
-                'gen',
-            ],
-            include:[{
-                model: Categorias,
-                as: Categorias,
-                attributes:["nombre"]
-            }
-                
-            ]
-            
-        })
-        res.status(200).json(contenidos)
-      
-    } catch (error) {
-        console.log('Error buscando el contenido', error);
-        res.status(500).json({ message: 'Error buscando el contenido', error})
-    }
-}
-)
-    // Get all content
+// Get all content
+router.get('/', contenidoController.obtenerContenidos);
 
+// get content for id
+router.get('/:id', contenidoController.obtenerContenidoPorId);
 
-router.get('/:id', (req, res) => {
-    // Get content by ID
-});
+//get content for title
 
-router.post('/', (req, res) => {
-    // Add new content
-});
+router.get('/titulo/:title', contenidoController.obtenerContenidoPorTitulo);
+
+//get content for genero
+router.get('/genero/:genero', contenidoController.obtenerContenidoPorGenero);
 
 router.put('/:id', (req, res) => {
     // Update content by ID
