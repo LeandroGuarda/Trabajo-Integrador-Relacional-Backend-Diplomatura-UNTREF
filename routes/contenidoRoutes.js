@@ -20,13 +20,17 @@ router.get('/titulo/:title', contenidoController.obtenerContenidoPorTitulo);
 //get content for genero
 router.get('/genero/:genero', contenidoController.obtenerContenidoPorGenero);
 
-router.put('/:id', (req, res) => {
-    // Update content by ID
-});
+//get content for categoria
 
-router.delete('/:id', (req, res) => {
-    // Delete content by ID
-});
+router.get('/categorias/:categorias', contenidoController.obtenerContenidoPorCategoria);
+
+// Create new content
+
+router.post('/', contenidoController.crearContenido);
+
+router.put('/:id',contenidoController.actualizarContenido);
+
+router.delete('/:id',contenidoController.eliminarContenido )
 
 module.exports = router;
     

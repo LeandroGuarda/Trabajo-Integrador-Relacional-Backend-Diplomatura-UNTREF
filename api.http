@@ -20,7 +20,7 @@ GET http://localhost:3000/contenido/genero/Drama
 
 ###  FILTRAR CONTENIDO POR CATEGORIA
 
-GET http://localhost:3000/contenido/categorias/1
+GET http://localhost:3000/contenido/categorias/2
 
 
 ###  CREAR una nueva pelicula
@@ -43,10 +43,10 @@ Content-Type: application/json
  
 
 ### MODIFICAR una pelicula
-PUT http://localhost:3000/contenido/98
+PUT http://localhost:3000/contenido/100
 Content-Type: application/json
 
-{  "id": 98,
+{  "id": 100,
   "titulo": "La era del hielo 2",
   "gen": "comedia",
   "poster": "./poster/8.jpg",
@@ -59,4 +59,4 @@ Content-Type: application/json
 
 
 ### ELIMINAR una pelicula
-DELETE http://localhost:3000/contenido/98
+DELETE http://localhost:3000/contenido/100

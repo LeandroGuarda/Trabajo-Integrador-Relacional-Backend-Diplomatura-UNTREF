@@ -74,29 +74,11 @@ app.get('/', (req,res) =>{
 
 // filtrar por categoria
 
-app.get("/contenido/id_categoria/:categoria", async (req, res) => {
-  try {
-    const contenido = await Contenido.findAll({ where: { id_categoria: req.params.categoria } });
-    contenido.length > 0
-      ? res.status(200).json(contenido)
-      : res.status(404).json({ error: "El trailer no existe en esta categoría" });
-  } catch (error) {
-    res.status(500).json({ error: `Error en el servidor: `, description: error.message });
-  }
-});
+
 
  // Agregar una nueva pelicula
 
- app.post("/contenido", async (req, res) => {
-  try {
-    const contenido = await Contenido.create(req.body);
-    res.status(201).json(contenido);
-  } catch (error) {
-    res
-     .status(500)
-     .json({ error: `Error en el servidor: `, description: error.message });
-  }
-});
+
 
 
 // Modificar una pelicula

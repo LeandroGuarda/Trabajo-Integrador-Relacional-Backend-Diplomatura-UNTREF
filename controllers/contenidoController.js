@@ -53,14 +53,72 @@ const obtenerContenidoPorGenero = async (req, res) => {
       res.status(500).json({ error: "Error en el servidor", description: error.message });
     }
   };
+
+
+  // Filtrar contenido por categoria
+
+  const obtenerContenidoPorCategoria = async (req, res) => {
+    try {
+      const contenido = await Contenido.findAll({ where: { id_categoria: req.params.categorias } });
+      contenido.length > 0
+        ? res.status(200).json(contenido)
+        : res.status(404).json({ error: "El trailer no existe en esta categoría" });
+    } catch (error) {
+      res.status(500).json({ error: "Error en el servidor", description: error.message });
+    }
+  };
+  
+  // Crear un nuevo Contenido
+
+  const crearContenido = async (req, res) => {
+    try {
+      const contenido = await Contenido.create(req.body);
+      res.status(201).json(contenido);
+    } catch (error) {
+      res.status(500).json({ error: "Error en el servidor", description: error.message });
+    }
+  };
+
+
+  // Actualizar un Contenido
+  const actualizarContenido = async (req, res) => {
+    try {
+      const contenido = await Contenido.findByPk(req.params.id);
+      if (!contenido) {
+        return res.status(404).json({ error: "El trailer no existe" });
+      }
+      await contenido.update(req.body);
+      res.status(200).json(contenido);
+    } catch (error) {
+      res.status(500).json({ error: "Error en el servidor", description: error.message });
+    }
+  };
   
 
+  //Eliminar una pelicula
 
-  
+  const eliminarContenido = async (req, res) => {
+    try {
+      const contenido = await Contenido.findByPk(req.params.id);
+      if (!contenido) {
+        return res.status(404).json({ error: "El trailer no existe" });
+      }
+      await contenido.destroy();
+      res.status(200).json({ message: "Trailer eliminado exitosamente" });
+    } catch (error) {
+      res.status(500).json({ error: "Error en el servidor", description: error.message });
+    }
+  };
 
 
-  module.exports = {
+
+module.exports = {
     obtenerContenidos, 
     obtenerContenidoPorId,
     obtenerContenidoPorTitulo,
-    obtenerContenidoPorGenero}
+    obtenerContenidoPorGenero,
+    obtenerContenidoPorCategoria,
+    crearContenido,
+    actualizarContenido,
+    eliminarContenido
+}
