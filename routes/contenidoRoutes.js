@@ -5,8 +5,6 @@ const contenidoController = require('../controllers/contenidoController');
 
 // Routes for CRUD
 
-    
-      
 // Get all content
 router.get('/', contenidoController.obtenerContenidos);
 
@@ -20,7 +18,7 @@ router.get('/titulo/:title', contenidoController.obtenerContenidoPorTitulo);
 //get content for genero
 router.get('/genero/:genero', contenidoController.obtenerContenidoPorGenero);
 
-//get content for categoria
+//get content for category
 
 router.get('/categorias/:categorias', contenidoController.obtenerContenidoPorCategoria);
 
@@ -28,7 +26,11 @@ router.get('/categorias/:categorias', contenidoController.obtenerContenidoPorCat
 
 router.post('/', contenidoController.crearContenido);
 
+// Update existing content by id
+
 router.put('/:id',contenidoController.actualizarContenido);
+
+// Delete existing content by id
 
 router.delete('/:id',contenidoController.eliminarContenido )
 

@@ -1,0 +1,4 @@
+DATABASE = trailerflixx
+DBUSER = root   
+PASSWORD = password
+HOST = localhost
