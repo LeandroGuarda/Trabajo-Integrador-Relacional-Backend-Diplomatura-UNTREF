@@ -7,7 +7,7 @@ GET http://localhost:3000/contenido
 
 
 ### FILTRAR una pelicula por ID
-GET http://localhost:3000/contenido/2
+GET http://localhost:3000/contenido/3
 
 
 ### FILTRAR por titulo
@@ -20,7 +20,7 @@ GET http://localhost:3000/contenido/genero/Drama
 
 ###  FILTRAR CONTENIDO POR CATEGORIA
 
-GET http://localhost:3000/contenido/categorias/2
+GET http://localhost:3000/contenido/categorias/1
 
 
 ###  CREAR una nueva pelicula
@@ -29,7 +29,7 @@ POST http://localhost:3000/contenido
 Content-Type: application/json
 
 {
-"titulo": "La era del hielo",
+"titulo": "La era del hielo 8",
 "gen": "comedia",
 "poster": "./poster/8.jpg",
 "duracion": 81,
@@ -43,11 +43,11 @@ Content-Type: application/json
  
 
 ### MODIFICAR una pelicula
-PUT http://localhost:3000/contenido/100
+PUT http://localhost:3000/contenido/102
 Content-Type: application/json
 
 {  "id": 100,
-  "titulo": "La era del hielo 2",
+  "titulo": "La era del hielo 10",
   "gen": "comedia",
   "poster": "./poster/8.jpg",
   "duracion": 81,
@@ -59,4 +59,4 @@ Content-Type: application/json
 
 
 ### ELIMINAR una pelicula
-DELETE http://localhost:3000/contenido/97
+DELETE http://localhost:3000/contenido/2

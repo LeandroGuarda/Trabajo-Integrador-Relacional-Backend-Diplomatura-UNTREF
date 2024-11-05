@@ -1,3 +1,4 @@
+
 const Contenido = require("../models/contenido")
 const Categorias = require('../models/categoria')
 const Generos = require('../models/generos')
@@ -104,38 +105,32 @@ const obtenerContenidoPorGenero = async (req, res) => {
   };
   
 
-  //Eliminar una pelicula
+  
 
-    const eliminarContenido = async (req,res) =>{
+// Eliminar una película
+const eliminarContenido = async (req, res) => {
+  try {
+      const { id } = req.params;
+      const existeContenido = await Contenido.findByPk(id);
 
-        try {
-        const {id} = req.params
-        const existeContenido = await Contenido.findByPk(id)
-        if(!existeContenido){
-            return res.status(404).json({error: "No se encontro contenido"})
-        }
-        await ContenidoActores.destroy({where: {id_contenido:id}})
-        await ContenidoGeneros.destroy({where: {id_contenido:id}})
-        await Contenido.destroy({ where: { id: id } });
-        } catch (error) {
-            res.status(500).json({ error: "Error en el servidor", description: error.message });
-            
-        }
+      if (!existeContenido) {
+          return res.status(404).json({ error: "No se encontró contenido" });
+      }
 
-    }
+      // Eliminar asociaciones
+      await ContenidoActores.destroy({ where: { id_contenido: id } });
+      await ContenidoGeneros.destroy({ where: { id_contenido: id } });
 
-//   const eliminarContenido = async (req, res) => {
-//     try {
-//       const contenido = await Contenido.findByPk(req.params.id);
-//       if (!contenido) {
-//         return res.status(404).json({ error: "El trailer no existe" });
-//       }
-//       await contenido.destroy();
-//       res.status(200).json({ message: "Trailer eliminado exitosamente" });
-//     } catch (error) {
-//       res.status(500).json({ error: "Error en el servidor", description: error.message });
-//     }
-//   };
+      // Eliminar el contenido
+      await Contenido.destroy({ where: { id } });
+
+      // Respuesta de éxito
+      return res.status(200).json({ message: "Contenido eliminado con éxito" });
+
+  } catch (error) {
+      return res.status(500).json({ error: "Error en el servidor", description: error.message });
+  }
+};
 
 
 

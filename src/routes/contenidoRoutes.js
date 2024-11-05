@@ -206,7 +206,6 @@ router.get('/categorias/:categorias', contenidoController.obtenerContenidoPorCat
 
 
 
-
 /**
  * @swagger
  * /contenido:
