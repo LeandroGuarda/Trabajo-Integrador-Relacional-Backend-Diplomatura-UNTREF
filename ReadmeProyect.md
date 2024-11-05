@@ -98,6 +98,7 @@ ESTRUCTURA DEL PROYECTO:
   - trailerflix.json
 /README.md
 /app.js
+/src/
 /conexion/
 /controllers/
 - contenidoController.js
