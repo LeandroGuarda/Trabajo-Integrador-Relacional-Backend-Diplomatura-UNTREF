@@ -1,11 +1,13 @@
 const express = require('express');
-const db = require('./conexion/database.js');
+const db = require('./src/conexion/database.js');
 const morgan = require('morgan');
-const Contenido  = require('./models/contenido.js');
-const contenidoRoutes = require('./routes/contenidoRoutes');
+const Contenido  = require('./src/models/contenido.js');
+const contenidoRoutes = require('./src/routes/contenidoRoutes.js');
+const { swaggerUI, swaggerDocs } = require('./src/utils/swaggerConfig.js');
 const app = express();
 
-// Resto del código...
+// Configuracion de swagger
+app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
 // Middlewares
 app.use(express.json());
@@ -40,5 +42,6 @@ app.get('/', (req,res) =>{
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);
+  console.log(`Documetacion de la API http://localhost:${PORT}/api-docs`);
 });
     

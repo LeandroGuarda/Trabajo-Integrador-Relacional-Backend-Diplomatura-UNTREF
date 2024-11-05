@@ -1,4 +1,4 @@
-const { sequelize } = require('../conexion/database');
+const { sequelize } = require('../conexion/database.js');
 const { DataTypes } = require('sequelize');
 const Contenido = require('./contenido.js');
 const Genero = require('./generos.js');
